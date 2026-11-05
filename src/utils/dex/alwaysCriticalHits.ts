@@ -1,5 +1,6 @@
 import { type GenerationNum, type MoveName } from '@smogon/calc';
 import { PokemonCriticalHitMoves } from '@showdex/consts/dex';
+import { getDexDescription } from './getDexDescription';
 import { getDexForFormat } from './getDexForFormat';
 
 /**
@@ -59,10 +60,16 @@ export const alwaysCriticalHits = (
 
   const dexMove = dex.moves.get(moveName);
 
-  if (!dexMove?.exists || !dexMove.desc) {
+  if (!dexMove?.exists) {
     return false;
   }
 
-  return (!!dexMove.shortDesc && CriticalHitDescRegex.test(dexMove.shortDesc))
-    || CriticalHitDescRegex.test(dexMove.desc);
+  const { desc, shortDesc } = getDexDescription(dex, dexMove);
+
+  if (!desc) {
+    return false;
+  }
+
+  return (!!shortDesc && CriticalHitDescRegex.test(shortDesc))
+    || CriticalHitDescRegex.test(desc);
 };

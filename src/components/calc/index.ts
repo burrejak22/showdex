@@ -1,3 +1,4 @@
+export * from './BattleAdvisor';
 export * from './BattleInfo';
 export * from './CalcdexContext';
 export * from './CalcdexErrorBoundary';

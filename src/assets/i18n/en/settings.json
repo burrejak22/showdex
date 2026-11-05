@@ -627,6 +627,11 @@
       "tooltip": "Shows additional field controls, such as <em>Stealth Rock</em> & <em>Spikes</em>, normally hidden for in-battle $t(common:products.calcdex_other)."
     },
 
+    "showBattleAdvisor": {
+      "label": "Show Battle Advisor",
+      "tooltip": "Suggests the best move or switch for your active Pokémon in singles battles, based on the calcs, speed & what your opponent's likely to click."
+    },
+
     "nhkoLabels": {
       "label": "Guaranteed NHKO Labels"
     },

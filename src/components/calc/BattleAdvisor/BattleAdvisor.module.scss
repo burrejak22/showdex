@@ -1,0 +1,205 @@
+@use 'config/colors';
+@use 'functions/color';
+@use 'mixins/flex';
+@use 'mixins/spacing';
+@use 'mixins/transition';
+
+.container {
+  @include flex.column($justify: flex-start, $align: stretch);
+  @include spacing.margin($bottom: 12px);
+  @include spacing.padding($x: 10px, $y: 8px);
+  border-radius: 10px;
+  font-size: 10px;
+  line-height: 1.4;
+  @include transition.apply(background-color, border-color);
+
+  &.light {
+    color: color.alpha(colors.$black, 0.8);
+    background-color: color.alpha(colors.$green, 0.08);
+    border: 1px solid color.alpha(colors.$green, 0.32);
+  }
+
+  &.dark {
+    color: color.alpha(colors.$white, 0.84);
+    background-color: color.alpha(colors.$green, 0.12);
+    border: 1px solid color.alpha(colors.$green, 0.4);
+  }
+}
+
+.header {
+  @include flex.row($justify: flex-start, $align: center);
+  gap: 8px;
+}
+
+.label {
+  @include spacing.padding($x: 6px, $y: 1px);
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: colors.$white;
+  background-color: colors.$green;
+}
+
+.verdict {
+  flex: 1;
+  font-size: 11px;
+
+  strong {
+    font-weight: 600;
+  }
+}
+
+.toggle {
+  @include spacing.padding($x: 6px, $y: 2px);
+  border: none;
+  border-radius: 6px;
+  font-size: 9px;
+  cursor: pointer;
+  color: inherit;
+  background-color: transparent;
+  @include transition.apply(background-color);
+
+  .light & {
+    &:hover {
+      background-color: color.alpha(colors.$black, 0.08);
+    }
+  }
+
+  .dark & {
+    &:hover {
+      background-color: color.alpha(colors.$white, 0.12);
+    }
+  }
+}
+
+.reasons,
+.threat {
+  @include spacing.margin($top: 3px);
+}
+
+.threat {
+  .light & {
+    color: color.alpha(colors.$black, 0.64);
+  }
+
+  .dark & {
+    color: color.alpha(colors.$white, 0.64);
+  }
+}
+
+.muted {
+  opacity: 0.7;
+}
+
+.details {
+  @include flex.column($justify: flex-start, $align: stretch);
+  @include spacing.margin($top: 6px);
+  gap: 2px;
+}
+
+.sectionTitle {
+  @include spacing.margin($top: 4px);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.row {
+  @include flex.row($justify: flex-start, $align: flex-start);
+  gap: 8px;
+  @include spacing.padding($x: 4px, $y: 1px);
+  border-radius: 4px;
+
+  &.best {
+    background-color: color.alpha(colors.$green, 0.16);
+  }
+}
+
+.rowName {
+  flex: 0 0 96px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowReasons {
+  flex: 1;
+  min-width: 0;
+}
+
+.note {
+  @include spacing.margin($top: 4px);
+  font-size: 9px;
+  opacity: 0.6;
+}
+
+.insight {
+  @include spacing.margin($top: 3px);
+  @include spacing.padding($x: 6px, $y: 2px);
+  border-radius: 4px;
+  font-weight: 500;
+
+  .light & {
+    background-color: color.alpha(colors.$orange, 0.12);
+  }
+
+  .dark & {
+    background-color: color.alpha(colors.$orange, 0.18);
+  }
+}
+
+.plan {
+  @include spacing.margin($top: 4px);
+}
+
+.planLabel {
+  @include spacing.margin($right: 6px);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.idea {
+  @include spacing.padding($x: 4px, $y: 1px);
+}
+
+.decision {
+  @include spacing.margin($top: 3px);
+  @include spacing.padding($x: 6px, $y: 2px);
+  border-radius: 4px;
+
+  &.yes {
+    .light & {
+      background-color: color.alpha(colors.$green, 0.14);
+    }
+
+    .dark & {
+      background-color: color.alpha(colors.$green, 0.22);
+    }
+  }
+
+  &.no {
+    .light & {
+      background-color: color.alpha(colors.$gray, 0.14);
+    }
+
+    .dark & {
+      background-color: color.alpha(colors.$gray, 0.22);
+    }
+  }
+}
+
+.decisionLabel {
+  @include spacing.margin($right: 6px);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

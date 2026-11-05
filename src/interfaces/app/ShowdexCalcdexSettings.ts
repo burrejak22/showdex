@@ -702,6 +702,16 @@ export interface ShowdexCalcdexSettings {
   expandFieldControls: boolean;
 
   /**
+   * Whether to show the battle advisor, which suggests the best move or switch for your active Pokemon.
+   *
+   * * Only shown on your own side of the Calcdex in singles battles.
+   *
+   * @default true
+   * @since 1.4.3
+   */
+  showBattleAdvisor: boolean;
+
+  /**
    * Colors for the NHKO values, up to 4HKO.
    *
    * * Any value after 4HKO will use the last defined color in the array.

@@ -445,6 +445,22 @@ export const CalcdexSettingsPane = ({
           )}
         />
 
+        <Field<ShowdexCalcdexSettings['showBattleAdvisor']>
+          name="calcdex.showBattleAdvisor"
+          component={Switch}
+          className={cx(styles.field, styles.switchField)}
+          label={t('calcdex.showBattleAdvisor.label', 'Show Battle Advisor') as React.ReactNode}
+          tooltip={(
+            <Trans
+              t={t}
+              i18nKey="calcdex.showBattleAdvisor.tooltip"
+              parent="div"
+              className={styles.tooltipContent}
+              shouldUnescape
+            />
+          )}
+        />
+
         <div className={styles.settingsGroupTitle}>
           {t('pane.sections.secondary.experimental', 'Experimental')}
         </div>

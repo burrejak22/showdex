@@ -11,7 +11,12 @@ import { type CalcdexBattleField, type CalcdexPlayerKey, type CalcdexPlayerSide 
 import { useColorScheme } from '@showdex/redux/store';
 import { formatId } from '@showdex/utils/core';
 import { logger } from '@showdex/utils/debug';
-import { formatDexDescription, getDexForFormat, getWeatherConditions } from '@showdex/utils/dex';
+import {
+  formatDexDescription,
+  getDexDescription,
+  getDexForFormat,
+  getWeatherConditions,
+} from '@showdex/utils/dex';
 import { useCalcdexContext } from '../CalcdexContext';
 import styles from './FieldCalc.module.scss';
 
@@ -181,8 +186,9 @@ export const FieldCalc = ({
     const currentSide = state[pkey]?.side;
     const active = sideKey === 'isGravity' ? field?.isGravity : !!currentSide?.[sideKey];
 
-    const desc = settings?.showFieldTooltips ? formatDexDescription(
-      (dexToggle?.shortDesc || dexToggle?.desc)
+    const toggleText = settings?.showFieldTooltips ? getDexDescription(dex, dexToggle) : null;
+    const desc = toggleText ? formatDexDescription(
+      (toggleText.shortDesc || toggleText.desc)
         ?.replace("This Pokemon's allies", 'Allies'),
     ) : null;
 

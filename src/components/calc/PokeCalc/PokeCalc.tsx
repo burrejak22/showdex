@@ -1,5 +1,6 @@
 import * as React from 'react';
 import cx from 'classnames';
+import { BattleAdvisor } from '../BattleAdvisor';
 import { useCalcdexContext } from '../CalcdexContext';
 import { PokeInfo } from '../PokeInfo';
 import { PokeMoves } from '../PokeMoves';
@@ -28,6 +29,9 @@ export const PokeCalc = ({
       )}
       style={style}
     >
+      {/* best move / switch suggestions (only renders on your own side in battles) */}
+      <BattleAdvisor />
+
       {/* name, types, level, HP, status, set, ability, nature, item */}
       <PokeInfo
         className={styles.info}

@@ -46,5 +46,20 @@ declare namespace Showdown {
     };
 
     getPokeballs(): ModdedDex['pokeballs'];
+
+    /**
+     * Text lookups (names, `desc`, `shortDesc`) for moves, items & abilities.
+     *
+     * * Added in Showdown client commit `fccc266` (Sep 2026), which moved descriptions out of the dex data.
+     * * Optional since older clients won't have it.
+     */
+    text?: {
+      getLanguage: () => string;
+      get: (effect: { id?: string; name?: string; effectType?: string; }, lang?: string) => {
+        name: string;
+        desc: string;
+        shortDesc: string;
+      };
+    };
   }
 }

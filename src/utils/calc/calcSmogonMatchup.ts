@@ -8,6 +8,7 @@ import {
   type Move as SmogonMove,
   type MoveName,
   type Pokemon as SmogonPokemon,
+  type Result as SmogonResult,
   type ShowdexCalcMods,
   calculate,
 } from '@smogon/calc';
@@ -86,6 +87,16 @@ export interface CalcdexMatchupResult {
   koChance?: string;
 
   /**
+   * Raw result from `calculate()`, if the calc ran.
+   *
+   * * Exposes the actual damage rolls & HP values for consumers that need numbers instead of formatted strings,
+   *   like the battle advisor.
+   *
+   * @since 1.4.3
+   */
+  result?: SmogonResult;
+
+  /**
    * Color that should be applied to the DOM element rendering `koChance`.
    *
    * * If the value is `null`, then no color (other than the default) should be applied.
@@ -129,6 +140,7 @@ export const calcSmogonMatchup = (
     opponentSelectionIndex?: number;
     allPlayerKeys?: CalcdexPlayerKey[]; // other active players used for Beat Up
     settings?: ShowdexSettings;
+    silent?: boolean; // skips the per-matchup info log (e.g., for the battle advisor's bulk calcs)
   },
 ): CalcdexMatchupResult => {
   const {
@@ -138,6 +150,7 @@ export const calcSmogonMatchup = (
     opponentSelectionIndex,
     allPlayerKeys: allPlayerKeysFromConfig,
     settings,
+    silent,
   } = config || {};
 
   const {
@@ -229,6 +242,7 @@ export const calcSmogonMatchup = (
       showdexMods,
     );
 
+    matchup.result = result;
     matchup.description = parseMatchupDescription(result);
     matchup.damageRange = getMatchupRange(result);
     matchup.koChance = formatMatchupNhko(result, settings?.calcdex?.nhkoLabels);
@@ -244,7 +258,7 @@ export const calcSmogonMatchup = (
     // object dump stays at debug (dev console + developerMode-only capture).
     const matchupDesc = matchup.description?.raw;
 
-    if (matchupDesc) {
+    if (matchupDesc && !silent) {
       const matchupKey = [
         state?.battleId || '?',
         playerKey,
